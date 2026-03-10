@@ -20,7 +20,8 @@ export abstract class RemoteAdapter extends EventEmitter {
     on(event: 'longClick', listener: () => void): this
     on(event: 'touch', listener: () => void): this
     on(event: 'disconnect', listener: () => void): this
-    on(event: string, listener: (...args: unknown[]) => void): this {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    on(event: string, listener: (...args: any[]) => void): this {
         return super.on(event, listener)
     }
 
@@ -29,7 +30,8 @@ export abstract class RemoteAdapter extends EventEmitter {
     emit(event: 'longClick'): boolean
     emit(event: 'touch'): boolean
     emit(event: 'disconnect'): boolean
-    emit(event: string, ...args: unknown[]): boolean {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    emit(event: string, ...args: any[]): boolean {
         return super.emit(event, ...args)
     }
 }

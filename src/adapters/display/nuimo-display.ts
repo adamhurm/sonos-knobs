@@ -18,7 +18,7 @@ import { DisplayAdapter, DisplayOptions, GlyphName } from './display'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type NuimoDevice = any
 
-const GLYPH_MAP: Record<GlyphName, typeof Glyph> = {
+const GLYPH_MAP: Record<GlyphName, Glyph> = {
     play: playGlyph,
     pause: pauseGlyph,
     stop: stopGlyph,
@@ -95,21 +95,19 @@ export class NuimoDisplayAdapter implements DisplayAdapter {
     // Private helpers
     // -------------------------------------------------------------------------
 
-    private show(glyph: typeof Glyph, transition: typeof DisplayTransition): void {
+    private show(glyph: Glyph, transition: DisplayTransition): void {
         this.device.displayGlyph(glyph, {
             alignment: GlyphAlignment.Center,
             transition,
         })
     }
 
-    private resolveTransition(
-        t: DisplayOptions['transition'],
-    ): typeof DisplayTransition {
+    private resolveTransition(t: DisplayOptions['transition']): DisplayTransition {
         return t === 'immediate' ? DisplayTransition.Immediate : DisplayTransition.CrossFade
     }
 
     /** Builds a two-digit volume glyph for values 0–100. */
-    private volumeGlyph(n: number): typeof Glyph {
+    private volumeGlyph(n: number): Glyph {
         const clamped = Math.max(0, Math.min(100, Math.round(n)))
         if (clamped === 100) return digitGlyph100
         const tens = digitGlyphsSmall[Math.floor(clamped / 10)]
@@ -118,7 +116,7 @@ export class NuimoDisplayAdapter implements DisplayAdapter {
     }
 
     /** Horizontally concatenates two glyphs with a single-pixel gap. */
-    private concatGlyph(a: typeof Glyph, b: typeof Glyph): typeof Glyph {
+    private concatGlyph(a: Glyph, b: Glyph): Glyph {
         if (a.characterRows.length !== b.characterRows.length) {
             throw new Error('Glyph heights do not match')
         }
@@ -135,10 +133,10 @@ export class NuimoDisplayAdapter implements DisplayAdapter {
     }
 
     /** Slices a wide banner into a sequence of 9-wide animation frames. */
-    private bannerToAnimation(banner: string[], addBuffer = false): Array<typeof Glyph> {
+    private bannerToAnimation(banner: string[], addBuffer = false): Glyph[] {
         const rows = addBuffer ? this.bannerAddBuffer(banner) : banner
         const frameCount = rows[0].length - 8
-        const frames: Array<typeof Glyph> = []
+        const frames: Glyph[] = []
         for (let i = 0; i < frameCount; i++) {
             const frame = rows.map((row) => row.substring(i, i + 9))
             frames.push(Glyph.fromString(frame))
