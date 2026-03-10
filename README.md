@@ -2,6 +2,8 @@
 
 Control a Sonos speaker with a physical knob over BLE.
 
+> Hey! Over here! Just a heads up: I (Adam) created this bot a while ago and stopped maintaining it, so I'm trying out Claude, starting with [this PR](https://github.com/adamhurm/sonos-knobs/pull/1). Please let this serve as a warning that the repo contains AI-generated content. 
+
 **Supported remotes**
 | Device | Rotate | Click | Long-click | Touch | Display |
 |---|---|---|---|---|---|
