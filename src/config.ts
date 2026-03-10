@@ -11,8 +11,23 @@ export interface Config {
     }
     speaker: {
         type: 'sonos'
-        /** IP address of the Sonos speaker. */
-        host: string
+        /**
+         * IP address of a single Sonos speaker.
+         * If omitted along with `hosts`, the app auto-discovers all speakers on the network
+         * and defaults to whichever is actively playing.
+         */
+        host?: string
+        /**
+         * Explicit list of Sonos speaker IPs to manage.
+         * When provided, the app uses only these speakers (no network discovery).
+         * Long-click the knob to cycle through them.
+         */
+        hosts?: string[]
+        /**
+         * How long (in ms) to wait for network discovery when no hosts are specified.
+         * Default: 5000
+         */
+        discoveryTimeout?: number
     }
     display: {
         /** Show animated SONOS splash on startup (Nuimo only). */
@@ -24,7 +39,7 @@ export interface Config {
 
 const DEFAULTS: Config = {
     remote: { type: 'nuimo' },
-    speaker: { type: 'sonos', host: '0.0.0.0' },
+    speaker: { type: 'sonos' },
     display: { splash: true, timeout: 5000 },
 }
 

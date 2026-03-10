@@ -12,9 +12,23 @@ remote:
 speaker:
   type: sonos
 
-  # IP address of your Sonos speaker.
+  # ── Single speaker ──────────────────────────────────────────────────────────
+  # Uncomment and set the IP address of your Sonos speaker.
   # Find it in the Sonos app: Settings → System → [room] → About My [room].
-  host: 192.168.1.50
+  # host: 192.168.1.50
+
+  # ── Multiple speakers / zones ────────────────────────────────────────────────
+  # List specific IPs to manage. Long-click the knob to cycle through zones.
+  # hosts:
+  #   - 192.168.1.50   # Living Room
+  #   - 192.168.1.51   # Kitchen
+  #   - 192.168.1.52   # Bedroom
+
+  # ── Auto-discovery (default when no host/hosts are set) ───────────────────
+  # Scans the local network for all Sonos speakers and defaults to whichever
+  # is actively playing. Long-click to cycle through all discovered zones.
+  # Increase discoveryTimeout (in ms) if speakers are slow to respond.
+  # discoveryTimeout: 5000
 
 display:
   # Show the animated SONOS splash on startup (Nuimo only).

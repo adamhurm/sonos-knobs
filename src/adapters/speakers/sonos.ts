@@ -5,10 +5,18 @@ import { PlaybackState, SpeakerAdapter } from './speaker'
  * Speaker adapter for Sonos devices, backed by the `sonos` npm package.
  */
 export class SonosSpeakerAdapter implements SpeakerAdapter {
-    private readonly device: Sonos
+    private device: Sonos
 
-    constructor(host: string) {
+    /** Human-readable zone name (resolved at construction time). */
+    readonly name: string
+
+    constructor(host: string, name?: string) {
         this.device = new Sonos(host)
+        this.name = name ?? host
+    }
+
+    get host(): string {
+        return this.device.host
     }
 
     async getVolume(): Promise<number> {
