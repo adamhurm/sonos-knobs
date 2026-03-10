@@ -1,1 +1,5 @@
 node_modules
+dist
+
+# User config contains the speaker IP — keep it local
+config.yaml

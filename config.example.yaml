@@ -1,0 +1,24 @@
+# sonos-knobs configuration
+# Copy this file to config.yaml and fill in your values.
+
+remote:
+  # "nuimo" or "ortho"
+  type: nuimo
+
+  # Optional: connect to a specific BLE device by ID.
+  # Leave commented out to auto-discover the first available device.
+  # deviceId: "XX:XX:XX:XX:XX:XX"
+
+speaker:
+  type: sonos
+
+  # IP address of your Sonos speaker.
+  # Find it in the Sonos app: Settings → System → [room] → About My [room].
+  host: 192.168.1.50
+
+display:
+  # Show the animated SONOS splash on startup (Nuimo only).
+  splash: true
+
+  # How long to show status glyphs (play/pause/volume) before clearing, in ms.
+  timeout: 5000
